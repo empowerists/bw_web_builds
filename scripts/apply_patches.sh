@@ -15,6 +15,6 @@ if [[ -z ${PATCH_NAME} ]]; then
 fi
 
 echo "Using patch: ${PATCH_NAME}"
-git apply "../patches/${PATCH_NAME}" --reject
+git apply "../patches/${PATCH_NAME}"
 
 echo "Patching successful!"
