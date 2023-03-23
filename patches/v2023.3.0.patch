@@ -1,5 +1,5 @@
 diff --git a/apps/web/src/app/app.component.ts b/apps/web/src/app/app.component.ts
-index 12f499a01..68250d53c 100644
+index d3b3e57e8d..6bc8d5dadc 100644
 --- a/apps/web/src/app/app.component.ts
 +++ b/apps/web/src/app/app.component.ts
 @@ -172,6 +172,10 @@ export class AppComponent implements OnDestroy, OnInit {
@@ -14,7 +14,7 @@ index 12f499a01..68250d53c 100644
              break;
            case "setFullWidth":
 diff --git a/apps/web/src/app/core/init.service.ts b/apps/web/src/app/core/init.service.ts
-index 8baa7c0dd..8f3b5d464 100644
+index 1ecd7d3fef..0dd5f049c7 100644
 --- a/apps/web/src/app/core/init.service.ts
 +++ b/apps/web/src/app/core/init.service.ts
 @@ -37,11 +37,23 @@ export class InitService {
@@ -44,10 +44,10 @@ index 8baa7c0dd..8f3b5d464 100644
  
        setTimeout(() => this.notificationsService.init(), 3000);
 diff --git a/apps/web/src/app/core/web-platform-utils.service.ts b/apps/web/src/app/core/web-platform-utils.service.ts
-index 2d682a35a..e64687b67 100644
+index c8b95538da..67fe582be4 100644
 --- a/apps/web/src/app/core/web-platform-utils.service.ts
 +++ b/apps/web/src/app/core/web-platform-utils.service.ts
-@@ -194,11 +194,11 @@ export class WebPlatformUtilsService implements PlatformUtilsService {
+@@ -195,15 +195,15 @@ export class WebPlatformUtilsService implements PlatformUtilsService {
    }
  
    isDev(): boolean {
@@ -56,26 +56,18 @@ index 2d682a35a..e64687b67 100644
    }
  
    isSelfHost(): boolean {
+-    return WebPlatformUtilsService.isSelfHost();
++    return false;
+   }
+ 
+   static isSelfHost(): boolean {
 -    return process.env.ENV.toString() === "selfhosted";
 +    return false;
    }
  
    copyToClipboard(text: string, options?: any): void | boolean {
-diff --git a/apps/web/src/app/layouts/navbar.component.html b/apps/web/src/app/layouts/navbar.component.html
-index e1513f050..2e854c3ba 100644
---- a/apps/web/src/app/layouts/navbar.component.html
-+++ b/apps/web/src/app/layouts/navbar.component.html
-@@ -68,7 +68,7 @@
-               <i class="bwi bwi-fw bwi-user" aria-hidden="true"></i>
-               {{ "accountSettings" | i18n }}
-             </a>
--            <a bitMenuItem href="https://bitwarden.com/help/" target="_blank" rel="noopener">
-+            <a bitMenuItem href="https://github.com/dani-garcia/vaultwarden/" target="_blank" rel="noopener">
-               <i class="bwi bwi-fw bwi-question-circle" aria-hidden="true"></i>
-               {{ "getHelp" | i18n }}
-             </a>
 diff --git a/apps/web/src/app/organizations/create/organization-information.component.html b/apps/web/src/app/organizations/create/organization-information.component.html
-index 6029cfd83..04324b7d1 100644
+index 6029cfd833..04324b7d19 100644
 --- a/apps/web/src/app/organizations/create/organization-information.component.html
 +++ b/apps/web/src/app/organizations/create/organization-information.component.html
 @@ -12,7 +12,7 @@
@@ -88,7 +80,7 @@ index 6029cfd83..04324b7d1 100644
      </bit-form-field>
      <bit-form-field class="tw-w-1/2" *ngIf="isProvider">
 diff --git a/apps/web/src/app/organizations/settings/account.component.html b/apps/web/src/app/organizations/settings/account.component.html
-index 1d11412bf..c7911e418 100644
+index 1d11412bfb..c7911e418e 100644
 --- a/apps/web/src/app/organizations/settings/account.component.html
 +++ b/apps/web/src/app/organizations/settings/account.component.html
 @@ -30,7 +30,7 @@
@@ -100,25 +92,8 @@ index 1d11412bf..c7911e418 100644
          <input
            id="billingEmail"
            class="form-control"
-diff --git a/apps/web/src/app/organizations/vault/vault.component.ts b/apps/web/src/app/organizations/vault/vault.component.ts
-index c175e42d7..25a3db231 100644
---- a/apps/web/src/app/organizations/vault/vault.component.ts
-+++ b/apps/web/src/app/organizations/vault/vault.component.ts
-@@ -81,11 +81,7 @@ export class VaultComponent implements OnInit, OnDestroy {
-   ) {}
- 
-   ngOnInit() {
--    this.trashCleanupWarning = this.i18nService.t(
--      this.platformUtilsService.isSelfHost()
--        ? "trashCleanupWarningSelfHosted"
--        : "trashCleanupWarning"
--    );
-+    this.trashCleanupWarning = this.i18nService.t("trashCleanupWarningSelfHosted");
-     // eslint-disable-next-line rxjs-angular/prefer-takeuntil, rxjs/no-async-subscribe
-     this.route.parent.params.subscribe(async (params: any) => {
-       this.organization = await this.organizationService.get(params.organizationId);
 diff --git a/apps/web/src/app/send/access.component.html b/apps/web/src/app/send/access.component.html
-index 91ae288d3..2310805ca 100644
+index 91ae288d3c..2310805cae 100644
 --- a/apps/web/src/app/send/access.component.html
 +++ b/apps/web/src/app/send/access.component.html
 @@ -137,15 +137,6 @@
@@ -138,7 +113,7 @@ index 91ae288d3..2310805ca 100644
      </div>
    </div>
 diff --git a/apps/web/src/app/settings/billing-history-view.component.ts b/apps/web/src/app/settings/billing-history-view.component.ts
-index 4a2ff349a..c8090b08e 100644
+index 4a2ff349a1..c8090b08e5 100644
 --- a/apps/web/src/app/settings/billing-history-view.component.ts
 +++ b/apps/web/src/app/settings/billing-history-view.component.ts
 @@ -34,7 +34,7 @@ export class BillingHistoryViewComponent implements OnInit {
@@ -151,7 +126,7 @@ index 4a2ff349a..c8090b08e 100644
    }
  }
 diff --git a/apps/web/src/app/settings/settings.component.ts b/apps/web/src/app/settings/settings.component.ts
-index 2a2fc4d27..26053e486 100644
+index d85ef54d96..a27c01489c 100644
 --- a/apps/web/src/app/settings/settings.component.ts
 +++ b/apps/web/src/app/settings/settings.component.ts
 @@ -55,10 +55,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
@@ -166,26 +141,8 @@ index 2a2fc4d27..26053e486 100644
 +    this.hideSubscription = true;
    }
  }
-diff --git a/apps/web/src/app/settings/two-factor-authenticator.component.ts b/apps/web/src/app/settings/two-factor-authenticator.component.ts
-index 652ee24a1..5a63562cc 100644
---- a/apps/web/src/app/settings/two-factor-authenticator.component.ts
-+++ b/apps/web/src/app/settings/two-factor-authenticator.component.ts
-@@ -98,11 +98,11 @@ export class TwoFactorAuthenticatorComponent
-       new window.QRious({
-         element: document.getElementById("qr"),
-         value:
--          "otpauth://totp/Bitwarden:" +
-+          "otpauth://totp/Vaultwarden:" +
-           encodeURIComponent(email) +
-           "?secret=" +
-           encodeURIComponent(this.key) +
--          "&issuer=Bitwarden",
-+          "&issuer=Vaultwarden",
-         size: 160,
-       });
-     }, 100);
 diff --git a/apps/web/src/app/tools/generator.component.ts b/apps/web/src/app/tools/generator.component.ts
-index 6a5f00c19..1bf8daf31 100644
+index 22a99e03fa..423b022b8d 100644
 --- a/apps/web/src/app/tools/generator.component.ts
 +++ b/apps/web/src/app/tools/generator.component.ts
 @@ -40,7 +40,7 @@ export class GeneratorComponent extends BaseGeneratorComponent {
@@ -194,17 +151,17 @@ index 6a5f00c19..1bf8daf31 100644
      );
 -    if (platformUtilsService.isSelfHost()) {
 +    if (true) {
-       // Cannot use Firefox Relay on self hosted web vaults due to CORS issues with Firefox Relay API
-       this.forwardOptions.splice(
-         this.forwardOptions.findIndex((o) => o.value === "firefoxrelay"),
-diff --git a/apps/web/src/app/vault/vault.component.ts b/apps/web/src/app/vault/vault.component.ts
-index 4113b3ab2..7a8227232 100644
---- a/apps/web/src/app/vault/vault.component.ts
-+++ b/apps/web/src/app/vault/vault.component.ts
-@@ -91,11 +91,7 @@ export class VaultComponent implements OnInit, OnDestroy {
-   async ngOnInit() {
-     this.showVerifyEmail = !(await this.tokenService.getEmailVerified());
+       // Allow only valid email forwarders for self host
+       this.forwardOptions = this.forwardOptions.filter((forwarder) => forwarder.validForSelfHosted);
+     }
+diff --git a/apps/web/src/app/vault/individual-vault/vault.component.ts b/apps/web/src/app/vault/individual-vault/vault.component.ts
+index 8286bbf460..ddf0d2dec1 100644
+--- a/apps/web/src/app/vault/individual-vault/vault.component.ts
++++ b/apps/web/src/app/vault/individual-vault/vault.component.ts
+@@ -101,11 +101,7 @@ export class VaultComponent implements OnInit, OnDestroy {
      this.showBrowserOutdated = window.navigator.userAgent.indexOf("MSIE") !== -1;
+     // disable warning for March release -> add await this.isLowKdfIteration(); when ready
+     this.showLowKdf = false;
 -    this.trashCleanupWarning = this.i18nService.t(
 -      this.platformUtilsService.isSelfHost()
 -        ? "trashCleanupWarningSelfHosted"
@@ -212,10 +169,45 @@ index 4113b3ab2..7a8227232 100644
 -    );
 +    this.trashCleanupWarning = this.i18nService.t("trashCleanupWarningSelfHosted");
  
-     // eslint-disable-next-line rxjs-angular/prefer-takeuntil, rxjs/no-async-subscribe
-     this.route.queryParams.pipe(first()).subscribe(async (params) => {
+     this.route.queryParams
+       .pipe(
+diff --git a/apps/web/src/app/vault/org-vault/vault.component.ts b/apps/web/src/app/vault/org-vault/vault.component.ts
+index 37104a9a72..af019cabea 100644
+--- a/apps/web/src/app/vault/org-vault/vault.component.ts
++++ b/apps/web/src/app/vault/org-vault/vault.component.ts
+@@ -81,11 +81,7 @@ export class VaultComponent implements OnInit, OnDestroy {
+   ) {}
+ 
+   async ngOnInit() {
+-    this.trashCleanupWarning = this.i18nService.t(
+-      this.platformUtilsService.isSelfHost()
+-        ? "trashCleanupWarningSelfHosted"
+-        : "trashCleanupWarning"
+-    );
++    this.trashCleanupWarning = this.i18nService.t("trashCleanupWarningSelfHosted");
+ 
+     this.route.parent.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
+       this.organization = this.organizationService.get(params.organizationId);
+diff --git a/apps/web/src/auth/settings/two-factor-authenticator.component.ts b/apps/web/src/auth/settings/two-factor-authenticator.component.ts
+index a82c54d346..af9aaf9a04 100644
+--- a/apps/web/src/auth/settings/two-factor-authenticator.component.ts
++++ b/apps/web/src/auth/settings/two-factor-authenticator.component.ts
+@@ -99,11 +99,11 @@ export class TwoFactorAuthenticatorComponent
+       new window.QRious({
+         element: document.getElementById("qr"),
+         value:
+-          "otpauth://totp/Bitwarden:" +
++          "otpauth://totp/Vaultwarden:" +
+           Utils.encodeRFC3986URIComponent(email) +
+           "?secret=" +
+           encodeURIComponent(this.key) +
+-          "&issuer=Bitwarden",
++          "&issuer=Bitwarden",
+         size: 160,
+       });
+     }, 100);
 diff --git a/apps/web/src/manifest.json b/apps/web/src/manifest.json
-index 92a1204c6..5a10dc9ae 100644
+index 92a1204c60..5a10dc9ae9 100644
 --- a/apps/web/src/manifest.json
 +++ b/apps/web/src/manifest.json
 @@ -12,6 +12,6 @@
@@ -228,7 +220,7 @@ index 92a1204c6..5a10dc9ae 100644
 +  "background_color": "#ffffff"
  }
 diff --git a/apps/web/src/scss/styles.scss b/apps/web/src/scss/styles.scss
-index 0003f521c..9470f0aa3 100644
+index 0003f521c7..9470f0aa37 100644
 --- a/apps/web/src/scss/styles.scss
 +++ b/apps/web/src/scss/styles.scss
 @@ -58,3 +58,47 @@
@@ -284,10 +276,10 @@ index 0003f521c..9470f0aa3 100644
 +app-security > app-two-factor-setup > form { @extend %vw-hide; }
 +/**** END Vaultwarden CHANGES ****/
 diff --git a/libs/angular/src/components/register.component.ts b/libs/angular/src/components/register.component.ts
-index 029639e7e..6c3606341 100644
+index b694ac66be..591af4d945 100644
 --- a/libs/angular/src/components/register.component.ts
 +++ b/libs/angular/src/components/register.component.ts
-@@ -35,7 +35,7 @@ export class RegisterComponent extends CaptchaProtectedComponent implements OnIn
+@@ -36,7 +36,7 @@ export class RegisterComponent extends CaptchaProtectedComponent implements OnIn
    showPassword = false;
    formPromise: Promise<RegisterResponse>;
    referenceData: ReferenceEventRequest;
@@ -295,17 +287,17 @@ index 029639e7e..6c3606341 100644
 +  showTerms = false;
    showErrorSummary = false;
    passwordStrengthResult: any;
-   color: string;
-@@ -88,7 +88,7 @@ export class RegisterComponent extends CaptchaProtectedComponent implements OnIn
-     protected logService: LogService
+   characterMinimumMessage: string;
+@@ -93,7 +93,7 @@ export class RegisterComponent extends CaptchaProtectedComponent implements OnIn
+     protected auditService: AuditService
    ) {
      super(environmentService, i18nService, platformUtilsService);
 -    this.showTerms = !platformUtilsService.isSelfHost();
 +    this.showTerms = false;
+     this.characterMinimumMessage = this.i18nService.t("characterMinimum", this.minimumLength);
    }
  
-   async ngOnInit() {
-@@ -96,6 +96,15 @@ export class RegisterComponent extends CaptchaProtectedComponent implements OnIn
+@@ -102,6 +102,15 @@ export class RegisterComponent extends CaptchaProtectedComponent implements OnIn
    }
  
    async submit(showToast = true) {
@@ -322,7 +314,7 @@ index 029639e7e..6c3606341 100644
      email = email.trim().toLowerCase();
      let name = this.formGroup.value.name;
 diff --git a/libs/components/src/menu/menu.component.html b/libs/components/src/menu/menu.component.html
-index 15f78351a..6d3421ffc 100644
+index d175a3fe3b..9f3150c3f6 100644
 --- a/libs/components/src/menu/menu.component.html
 +++ b/libs/components/src/menu/menu.component.html
 @@ -1,7 +1,7 @@
