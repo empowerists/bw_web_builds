@@ -14,6 +14,9 @@ if [[ -z ${PATCH_NAME} ]]; then
     fi
 fi
 
+echo "Patching images"
+cp -vfR ../resources/src/* ./apps/web/src/
+
 echo "Using patch: ${PATCH_NAME}"
 git apply "../patches/${PATCH_NAME}"
 
