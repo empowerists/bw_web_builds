@@ -28,8 +28,8 @@ USER node
 # Can be a tag, release, but prefer a commit hash because it's not changeable
 # https://github.com/bitwarden/clients/commit/${VAULT_VERSION}
 #
-# Using https://github.com/bitwarden/clients/releases/tag/web-v2023.4.0
-ARG VAULT_VERSION=01e3a32d5098a50c110f599406e116794b0253c8
+# Using https://github.com/bitwarden/clients/releases/tag/web-v2023.4.2
+ARG VAULT_VERSION=b416432bce79cf6ee99adb908a5a26b66bb7869b
 
 WORKDIR /vault
 RUN git init
@@ -53,7 +53,7 @@ WORKDIR /vault/apps/web
 RUN npm run dist:oss:selfhost
 
 RUN printf '{"version":"%s"}' \
-      $(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/dani-garcia/bw_web_builds.git 'v*' | tail -n1 | grep -Eo '[^\/v]*$') \
+      $(git -c 'versionsort.suffix=-' ls-remote --tags --refs --sort='v:refname' https://github.com/empowerists/bw_web_builds.git 'v*' | tail -n1 | grep -Eo '[^\/v]*$') \
       > build/vw-version.json
 
 # Delete debugging map files, optional
