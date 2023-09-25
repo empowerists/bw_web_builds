@@ -382,3 +382,72 @@ index d175a3fe3b..ca3c420b73 100644
      [attr.role]="ariaRole"
      [attr.aria-label]="ariaLabel"
      cdkTrapFocus
+diff --git a/apps/web/src/app/auth/settings/two-factor-authenticator.component.html b/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
+index 748c6e0bd..88ded67ce 100644
+--- a/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
++++ b/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
+@@ -49,19 +49,19 @@
+             <li>
+               <i class="bwi bwi-li bwi-apple"></i>{{ "iosDevices" | i18n }}:
+               <a
+-                href="https://itunes.apple.com/us/app/authy/id494168017?mt=8"
++                href="https://apps.apple.com/us/app/salesforce-authenticator/id782057975"
+                 target="_blank"
+                 rel="noopener"
+-                >Authy</a
++                >Salesforce Authenticator</a
+               >
+             </li>
+             <li>
+               <i class="bwi bwi-li bwi-android"></i>{{ "androidDevices" | i18n }}:
+               <a
+-                href="https://play.google.com/store/apps/details?id=com.authy.authy"
++                href="https://play.google.com/store/apps/details?id=com.salesforce.authenticator"
+                 target="_blank"
+                 rel="noopener"
+-                >Authy</a
++                >Salesforce Authenticator</a
+               >
+             </li>
+             <li>
+diff --git a/apps/web/src/locales/en/messages.json b/apps/web/src/locales/en/messages.json
+index 9ff2aeb4b..88c5f3982 100644
+--- a/apps/web/src/locales/en/messages.json
++++ b/apps/web/src/locales/en/messages.json
+@@ -845,8 +845,8 @@
+     "message": "Authenticator app"
+   },
+   "authenticatorAppDesc": {
+-    "message": "Use an authenticator app (such as Authy or Google Authenticator) to generate time-based verification codes.",
+-    "description": "'Authy' and 'Google Authenticator' are product names and should not be translated."
++    "message": "Use an authenticator app (such as Salesforce Authentication or Microsoft Authenticator) to generate time-based verification codes.",
++    "description": "'alesforce Authentication' and 'Microsoft Authenticator' are product names and should not be translated."
+   },
+   "yubiKeyTitle": {
+     "message": "YubiKey OTP security key"
+diff --git a/apps/web/src/locales/en_GB/messages.json b/apps/web/src/locales/en_GB/messages.json
+index febe11638..2289926c0 100644
+--- a/apps/web/src/locales/en_GB/messages.json
++++ b/apps/web/src/locales/en_GB/messages.json
+@@ -839,7 +839,7 @@
+     "message": "Authenticator app"
+   },
+   "authenticatorAppDesc": {
+-    "message": "Use an authenticator app (such as Authy or Google Authenticator) to generate time-based verification codes.",
++    "message": "Use an authenticator app (such as Salesforce Authentication or Microsoft Authenticator) to generate time-based verification codes.",
+     "description": "'Authy' and 'Google Authenticator' are product names and should not be translated."
+   },
+   "yubiKeyTitle": {
+diff --git a/apps/web/src/locales/fr/messages.json b/apps/web/src/locales/fr/messages.json
+index 235180cc3..3c01ce2b0 100644
+--- a/apps/web/src/locales/fr/messages.json
++++ b/apps/web/src/locales/fr/messages.json
+@@ -839,7 +839,7 @@
+     "message": "Application d'authentification"
+   },
+   "authenticatorAppDesc": {
+-    "message": "Utilisez une application d'authentification (comme Authy ou Google Authenticator) pour générer des codes de vérification basés sur le temps.",
++    "message": "Utilisez une application d'authentification (comme Salesforce Authenticator ou Microsoft Authenticator) pour générer des codes de vérification basés sur le temps.",
+     "description": "'Authy' and 'Google Authenticator' are product names and should not be translated."
+   },
+   "yubiKeyTitle": {
