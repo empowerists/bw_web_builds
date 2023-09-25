@@ -382,3 +382,31 @@ index d175a3fe3b..ca3c420b73 100644
      [attr.role]="ariaRole"
      [attr.aria-label]="ariaLabel"
      cdkTrapFocus
+diff --git a/apps/web/src/app/auth/settings/two-factor-authenticator.component.html b/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
+index 748c6e0bd..88ded67ce 100644
+--- a/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
++++ b/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
+@@ -49,19 +49,19 @@
+             <li>
+               <i class="bwi bwi-li bwi-apple"></i>{{ "iosDevices" | i18n }}:
+               <a
+-                href="https://itunes.apple.com/us/app/authy/id494168017?mt=8"
++                href="https://apps.apple.com/us/app/salesforce-authenticator/id782057975"
+                 target="_blank"
+                 rel="noopener"
+-                >Authy</a
++                >Salesforce Authenticator</a
+               >
+             </li>
+             <li>
+               <i class="bwi bwi-li bwi-android"></i>{{ "androidDevices" | i18n }}:
+               <a
+-                href="https://play.google.com/store/apps/details?id=com.authy.authy"
++                href="https://play.google.com/store/apps/details?id=com.salesforce.authenticator"
+                 target="_blank"
+                 rel="noopener"
+-                >Authy</a
++                >Salesforce Authenticator</a
+               >
+             </li>
+             <li>
