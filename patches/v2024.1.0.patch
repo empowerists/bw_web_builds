@@ -456,7 +456,6 @@ index 05cd9fef4e..60128014d7 100644
 +app-security > app-two-factor-setup > form {
 +  @extend %vw-hide;
 +}
-+
 +/**** END Vaultwarden CHANGES ****/
 diff --git a/apps/web/webpack.config.js b/apps/web/webpack.config.js
 index 0254636895..9a2ea1e8fb 100644
