@@ -25,35 +25,17 @@ index 83e0e35cf3..9385c4071c 100644
        </bit-form-field>
        <bit-form-field>
 diff --git a/apps/web/src/app/admin-console/organizations/settings/account.component.ts b/apps/web/src/app/admin-console/organizations/settings/account.component.ts
-index 10aa1224e2..df3d18e89b 100644
+index 10aa1224e2..3b6f3a702a 100644
 --- a/apps/web/src/app/admin-console/organizations/settings/account.component.ts
 +++ b/apps/web/src/app/admin-console/organizations/settings/account.component.ts
-@@ -120,14 +120,14 @@ export class AccountComponent {
-         this.canUseApi = organization.useApi;
- 
-         // Update disabled states - reactive forms prefers not using disabled attribute
--        if (!this.selfHosted) {
-+        if (this.selfHosted) {
-           this.formGroup.get("orgName").enable();
-           this.formGroup.get("businessName").enable();
-           this.collectionManagementFormGroup.get("limitCollectionCreationDeletion").enable();
-           this.collectionManagementFormGroup.get("allowAdminAccessToAllCollectionItems").enable();
-         }
- 
--        if (!this.selfHosted && this.canEditSubscription) {
-+        if (this.selfHosted && this.canEditSubscription) {
-           this.formGroup.get("billingEmail").enable();
-         }
- 
-@@ -183,7 +183,7 @@ export class AccountComponent {
+@@ -182,6 +182,7 @@ export class AccountComponent {
+   };
  
    submitCollectionManagement = async () => {
++    return; // flexible collections are not supported by Vaultwarden
      // Early exit if self-hosted
--    if (this.selfHosted) {
-+    if (!this.selfHosted) {
+     if (this.selfHosted) {
        return;
-     }
- 
 diff --git a/apps/web/src/app/app.component.ts b/apps/web/src/app/app.component.ts
 index 1f7d8cc2f1..5b45fd9b52 100644
 --- a/apps/web/src/app/app.component.ts
@@ -522,3 +504,76 @@ index 4293eb9966..7a8e861e8d 100644
      this.onRecoverSelected.emit();
    }
  }
+diff --git a/apps/web/src/app/auth/settings/two-factor-authenticator.component.html b/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
+index 748c6e0bd..88ded67ce 100644
+--- a/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
++++ b/apps/web/src/app/auth/settings/two-factor-authenticator.component.html
+@@ -49,19 +49,19 @@
+             <li>
+               <i class="bwi bwi-li bwi-apple"></i>{{ "iosDevices" | i18n }}:
+               <a
+-                href="https://itunes.apple.com/us/app/authy/id494168017?mt=8"
++                href="https://apps.apple.com/us/app/salesforce-authenticator/id782057975"
+                 target="_blank"
+                 rel="noopener"
+-                >Authy</a
++                >Salesforce Authenticator</a
+               >
+             </li>
+             <li>
+               <i class="bwi bwi-li bwi-android"></i>{{ "androidDevices" | i18n }}:
+               <a
+-                href="https://play.google.com/store/apps/details?id=com.authy.authy"
++                href="https://play.google.com/store/apps/details?id=com.salesforce.authenticator"
+                 target="_blank"
+                 rel="noopener"
+-                >Authy</a
++                >Salesforce Authenticator</a
+               >
+             </li>
+             <li>
+diff --git a/apps/web/src/locales/en/messages.json b/apps/web/src/locales/en/messages.json
+index 3826395b3..e7f0fddf9 100644
+--- a/apps/web/src/locales/en/messages.json
++++ b/apps/web/src/locales/en/messages.json
+@@ -908,8 +908,8 @@
+     "message": "Authenticator app"
+   },
+   "authenticatorAppDesc": {
+-    "message": "Use an authenticator app (such as Authy or Google Authenticator) to generate time-based verification codes.",
+-    "description": "'Authy' and 'Google Authenticator' are product names and should not be translated."
++    "message": "Use an authenticator app (such as Salesforce Authenticator or Microsoft Authenticator) to generate time-based verification codes.",
++    "description": "'Salesforce Authenticator' and 'Microsoft Authenticator' are product names and should not be translated."
+   },
+   "yubiKeyTitle": {
+     "message": "YubiKey OTP security key"
+diff --git a/apps/web/src/locales/en_GB/messages.json b/apps/web/src/locales/en_GB/messages.json
+index 084f9bb20..08c9d912b 100644
+--- a/apps/web/src/locales/en_GB/messages.json
++++ b/apps/web/src/locales/en_GB/messages.json
+@@ -908,8 +908,8 @@
+     "message": "Authenticator app"
+   },
+   "authenticatorAppDesc": {
+-    "message": "Use an authenticator app (such as Authy or Google Authenticator) to generate time-based verification codes.",
+-    "description": "'Authy' and 'Google Authenticator' are product names and should not be translated."
++    "message": "Use an authenticator app (such as Salesforce Authenticator or Microsoft Authenticator) to generate time-based verification codes.",
++    "description": "'Salesforce Authenticator' and 'Microsoft Authenticator' are product names and should not be translated."
+   },
+   "yubiKeyTitle": {
+     "message": "YubiKey OTP security key"
+diff --git a/apps/web/src/locales/fr/messages.json b/apps/web/src/locales/fr/messages.json
+index 36e79196f..be4ebb9be 100644
+--- a/apps/web/src/locales/fr/messages.json
++++ b/apps/web/src/locales/fr/messages.json
+@@ -908,8 +908,8 @@
+     "message": "Application d'authentification"
+   },
+   "authenticatorAppDesc": {
+-    "message": "Utilisez une application d'authentification (comme Authy ou Google Authenticator) pour générer des codes de vérification basés sur le temps.",
+-    "description": "'Authy' and 'Google Authenticator' are product names and should not be translated."
++    "message": "Utilisez une application d'authentification (comme Salesforce Authenticator ou Microsoft Authenticator) pour générer des codes de vérification basés sur le temps.",
++    "description": "'Salesforce Authenticator' and 'Microsoft Authenticator' are product names and should not be translated."
+   },
+   "yubiKeyTitle": {
+     "message": "Clé de sécurité OTP YubiKey"
