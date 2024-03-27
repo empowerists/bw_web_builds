@@ -23,8 +23,9 @@ fi
 PATCH_FILENAME="${VAULT_VERSION}.patch"
 
 if [ "$(git status --porcelain | wc -l)" -ge 1 ]; then
-    git --no-pager diff --no-color --minimal -- . \
+    git --no-pager diff --no-color --minimal --abbrev=10 -- . \
       ':!package-lock.json' \
+      ':!apps/web/src/app/layouts/password-manager-logo.ts' \
       > "../patches/${PATCH_FILENAME}"
     echo "Patch has been created here: patches/${PATCH_FILENAME}"
 else
