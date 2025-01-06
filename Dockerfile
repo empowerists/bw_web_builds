@@ -23,8 +23,8 @@ RUN node --version && npm --version
 # Can be a tag, release, but prefer a commit hash because it's not changeable
 # https://github.com/bitwarden/clients/commit/${VAULT_VERSION}
 #
-# Using https://github.com/bitwarden/clients/releases/tag/web-v2024.6.2
-ARG VAULT_VERSION=e2354e8694ab5e532d04f275e4bd6bf560c7509b
+# Using https://github.com/bitwarden/clients/releases/tag/web-v2024.12.0
+ARG VAULT_VERSION=e0c8f2ced997fc279c8ded903471ca3fa0fe5e94
 ENV VAULT_VERSION=$VAULT_VERSION
 ENV VAULT_FOLDER=bw_clients
 ENV CHECKOUT_TAGS=false
@@ -36,6 +36,8 @@ COPY patches ./patches
 COPY resources ./resources
 COPY scripts ./scripts
 RUN chmod -R +x /bw_web_builds/scripts
+# Use a glob pattern here so builds will continue even if the `.build_env` does not exists
+COPY .build_env* ./
 
 RUN ./scripts/checkout_web_vault.sh
 RUN ./scripts/patch_web_vault.sh
@@ -44,7 +46,7 @@ RUN mv "${VAULT_FOLDER}/apps/web/build" ./web-vault
 
 RUN tar -czvf "bw_web_vault.tar.gz" web-vault --owner=0 --group=0
 # Output the sha256sum here so people are able to match the sha256sum from the CI with the assets and the downloaded version if needed
-RUN echo "sha256sum: $(sha256sum "bw_web_vault.tar.gz")"
+RUN echo "sha256sum: $(sha256sum bw_web_vault.tar.gz)"
 
 # We copy the final result as a separate empty image so there's no need to download all the intermediate steps
 # The result is included both uncompressed and as a tar.gz, to be able to use it in the docker images and the github releases directly
