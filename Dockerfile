@@ -17,14 +17,14 @@
 #    Note: you can use --build-arg to specify the version to build:
 #    docker build -t web_vault_build --build-arg VAULT_VERSION=main .
 
-FROM node:22-bookworm AS build
+FROM node:22-trixie AS build
 RUN node --version && npm --version
 
 # Can be a tag, release, but prefer a commit hash because it's not changeable
 # https://github.com/bitwarden/clients/commit/${VAULT_VERSION}
 #
-# Using https://github.com/vaultwarden/vw_web_builds/tree/v2025.8.0
-ARG VAULT_VERSION=ba0788261542dac698cc4784a20a3ebaca5532fc
+# Using https://github.com/vaultwarden/vw_web_builds/tree/v2025.9.1
+ARG VAULT_VERSION=80bb2f448347749b6e93b15f73de1a600a0249bb
 ENV VAULT_VERSION=$VAULT_VERSION
 ENV VAULT_FOLDER=bw_clients
 ENV CHECKOUT_TAGS=false
